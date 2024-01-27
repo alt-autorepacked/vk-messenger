@@ -53,6 +53,7 @@ remote_version=$(_check_version_from_remote)
 
 if [ "$remote_version" != "$download_version" ]; then
     TAG="v$download_version"
+    _add_repo_suffix
     _create_release
     echo "Release created: $TAG"
 else
