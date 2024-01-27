@@ -1,5 +1,7 @@
 #!/bin/sh
 
+. /ets/os-release
+
 ORG_NAME=alt-autorepacked
 
 BASE_REMOTE_URL=https://github.com/alt-autorepacked
@@ -22,12 +24,16 @@ _check_version_from_download() {
 }
 
 _add_repo_suffix() {
-    suffix=".$(epm print info -r)"
+    if [ -n "$ALT_BRANCH_ID" ]; then
+        suffix=".$ALT_BRANCH_ID"
+    else
+        suffix=".$(epm print info -r)"
+    fi
     for file in *.rpm; do
         if [ ! -f "$file" ]; then
             continue
         fi
-        base="${file%.rpm}"
+        base="${file%.rpm}"e
         new_filename="${base}${suffix}.rpm"
         mv "$file" "$new_filename"
     done
