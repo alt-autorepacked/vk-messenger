@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. /ets/os-release
+. /etc/os-release
 
 ORG_NAME=alt-autorepacked
 
