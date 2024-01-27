@@ -12,12 +12,12 @@ jobs:
   check-versions:
     strategy:
       matrix:
-        conainer: 
+        container: 
           - alt:sisyphus
           - alt:p10
     runs-on: ubuntu-latest
     container:
-      image: alt:p10
+      image: ${{ matrix.container }}
     steps:
       - name: install packages
         run: |
