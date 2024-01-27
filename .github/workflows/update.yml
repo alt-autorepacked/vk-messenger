@@ -1,0 +1,26 @@
+name: Check versions
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  check-versions:
+    runs-on: ubuntu-latest
+    container:
+      image: alt:p10
+    steps:
+      - name: install packages
+        run: |
+          apt-get update && apt-get -y install eepm git
+          epm update
+    
+      - uses: actions/checkout@v2
+
+      - name: Repack
+        run: |
+          ./update.sh
