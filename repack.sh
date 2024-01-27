@@ -3,8 +3,7 @@
 . /etc/os-release
 
 ORG_NAME=alt-autorepacked
-
-BASE_REMOTE_URL=https://github.com/alt-autorepacked
+BASE_REMOTE_URL=https://github.com/$ORG_NAME
 
 _get_suffix() {
     if [ -n "$ALT_BRANCH_ID" ]; then
@@ -45,7 +44,7 @@ _add_repo_suffix() {
 }
 
 _create_release() {
-    suffix="*.$(epm print info -a).$(epm print info -r).rpm"
+    suffix="*$(_get_suffix)"
     gh release create $TAG -R $ORG_NAME/$_package --notes "[CI] automatic release"
     gh release upload $TAG -R $ORG_NAME/$_package $suffix
 }
@@ -70,4 +69,3 @@ if [ "$remote_version" != "$download_version" ]; then
 else
     echo "No new version to release. Current version: $download_version"
 fi
-
