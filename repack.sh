@@ -7,7 +7,12 @@ ORG_NAME=alt-autorepacked
 BASE_REMOTE_URL=https://github.com/alt-autorepacked
 
 _get_suffix() {
-    echo ".$(epm print info -a).$(epm print info -r).rpm"
+    if [ -n "$ALT_BRANCH_ID" ]; then
+        suffix=".$ALT_BRANCH_ID"
+    else
+        suffix=".$(epm print info -r)"
+    fi
+    echo ".$(epm print info -a)$suffix.rpm"
 }
 
 _check_version_from_remote() {
