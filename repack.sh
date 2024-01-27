@@ -38,7 +38,7 @@ _add_repo_suffix() {
         if [ ! -f "$file" ]; then
             continue
         fi
-        base="${file%.rpm}"e
+        base="${file%.rpm}"
         new_filename="${base}${suffix}.rpm"
         mv "$file" "$new_filename"
     done
